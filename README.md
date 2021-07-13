@@ -12,3 +12,11 @@
 > 6. Class Diagram created and added to doc forlder,
 > 7. Wireframes created and added to doc folder,
 -----
+## DOCS
+-----
+> 1. USECASE - https://florentgallou-dev.github.io/toDoList/toDoList-UseCase.html
+> 2. FUNCTIONAL TREE - https://florentgallou-dev.github.io/toDoList/toDoList-FunctionalTree.html
+> 3. DATABASE DIAGRAM - https://florentgallou-dev.github.io/toDoList/toDoList-DataBaseDiagram.html
+> 4. CLASS DIAGRAM - https://florentgallou-dev.github.io/toDoList/toDoList-ClassDiagram.html
+> 5. WIREFRAMES - https://florentgallou-dev.github.io/toDoList/toDoList-Wireframes.html
+-----
