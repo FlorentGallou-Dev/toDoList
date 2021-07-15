@@ -13,17 +13,20 @@
 > 7. Wireframes created and added to doc folder,
 > 8. KanBan done,
 > 9. Readme updated with docs liked to GHPage,
-> 11. Connecting symfony to mySQL server,
+> 11. Connected symfony to mySQL server,
 > 11. First controler ToDoListController created
 > 12. User entity created with make:entity command,
 > 13. Authentication created with make:Auth command,
 > 14. Sets login obligation by adding ToDoListController the IsGranted Method,
-> 15. Adding properties to User entity,
-> 16. Creating fixtures for User entity,
+> 15. Added properties to User entity,
+> 16. Created fixtures for User entity,
 > 17. Project entity created with make:entity
 > 18. Task entity created with make:entity
 > 19. Foreign-key between Project and User done with make:entity,
 > 20. Foreign-key between Task and Project done with make:entity,
+> 21. Created fixtures for Project Entity,
+> 22. Created fixtures for Task Entity,
+> 23. Created Templates - Header, Nav, Footer and customized Home title and prim title,
 -----
 ## DOCS
 -----
