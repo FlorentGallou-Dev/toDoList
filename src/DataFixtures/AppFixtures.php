@@ -64,8 +64,9 @@ class AppFixtures extends Fixture
 
                 $project->setUser($user);
 
-                 //Stting  a random amount of tasks between 1 to 10 for the actualy created Project
-                for ($k=1; $k < 11; $k++) { 
+                //Setting  a random amount of tasks between 1 to 10 for the actualy created Project
+                $randomTasks = mt_rand(2, 11);
+                for ($k=1; $k < $randomTasks; $k++) { 
                     $task = new Task();
 
                     //Setting a random selection in the 5 task titles
