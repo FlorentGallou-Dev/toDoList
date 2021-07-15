@@ -1,0 +1,32 @@
+    <div class="container col-6 col-sm-12 bg-nav">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"></a>
+                <button class="navbar-toggler bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse bg-dark px-1 px-sm-0" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        {% if app.user %}
+                            <li class="nav-item">
+                                {# Checking current user "sex" to know how to call them #}
+                                <p class="text-light px-lg-3 py-2 m-0">
+                                    Bonjour, {% if app.user.sex is same as "Homme" %} Monsieur {% elseif app.user.sex is same as "Femme" %} Madame {% else %} {% endif %}{{app.user.lastname}} {{app.user.firstname}}
+                                </p>
+                            </li>
+                        {% endif %}
+                        <li class="nav-item text-uppercase">
+                            <a class="nav-link" href="{{ path("to_do_list") }}">Mes projets</a>
+                        </li>
+                        <li class="nav-item text-uppercase">
+                            <a class="nav-link" href="">Nouveau projet</a>
+                        </li>
+                        <li class="nav-item text-uppercase">
+                            <a class="btn btn-warning mx-0 mx-lg-3" href="{{ path('app_logout') }}">Déconnexion</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
