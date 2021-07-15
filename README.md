@@ -27,6 +27,10 @@
 > 21. Created fixtures for Project Entity,
 > 22. Created fixtures for Task Entity,
 > 23. Created Templates - Header, Nav, Footer and customized Home title and prim title,
+> 24. Created home page controller sending projects list,
+> 25. Created home page vue for projects list to display,
+> 26. Created single controller for project only for nom,
+> 27. 
 -----
 ## DOCS
 -----
