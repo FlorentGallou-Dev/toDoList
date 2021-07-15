@@ -22,6 +22,8 @@
 > 16. Creating fixtures for User entity,
 > 17. Project entity created with make:entity
 > 18. Task entity created with make:entity
+> 19. Foreign-key between Project and User done with make:entity,
+> 20. Foreign-key between Task and Project done with make:entity,
 -----
 ## DOCS
 -----
