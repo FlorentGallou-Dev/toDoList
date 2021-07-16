@@ -1,4 +1,32 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<div class="">
+    {{ form_start(form, { 'attr': {'class': 'row g-3'} }) }}
+        {#{{ form_widget(form) }}#}
+        <div class="my-custom-class-for-errors">
+            {{ form_errors(form) }}
+        </div>
+
+        <div class="col-12 row my-3">
+            {{ form_label(form.subject, 'Sujet', {'label_attr': {'class': 'form-label fw-bold'}})}}
+            {{ form_widget(form.subject, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+        <div class="col-12 row my-3">
+            {{ form_label(form.description, 'Description', {'label_attr': {'class': 'form-label fw-bold'}})}}
+            {{ form_widget(form.description, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+
+        <div class="col-12 row my-3">
+            {{ form_label(form.deadline_date, 'Date butoire', {'label_attr': {'class': 'form-label fw-bold'}})}}
+            {{ form_widget(form.deadline_date, { 'attr': {'class': 'd-flex'} }) }}
+        </div>
+
+        <div class="col-12 d-flex my-3">
+            {{ form_label(form.status, 'Projet terminé', {'label_attr': {'class': 'form-label fw-bold'}})}}
+            {{ form_widget(form.status, { 'attr': {'class': 'form-check-label mx-3'} }) }}
+        </div>
+
+        <div class="col-12 row my-3">
+            <a class="btn btn-warning m-2">{{ button_label|default('Enregistrer') }}</a>
+        </div>
+        
+    {{ form_end(form) }}
+</div>
