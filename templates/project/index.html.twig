@@ -28,8 +28,16 @@
                 {% for project in projects %}
                 <div class='col-12 my-3 mx-auto'>
                     <div class='card mx-1 border border-2 border-warning'>
-                        <div class='card-body bg-dark'>
-                            <h5 class='card-title text-warning'>{{ project.subject}}</h5>
+                        <div class='card-body bg-dark d-flex justify-content-between'>
+                            <h5 class='card-title text-warning col-10'>{{ project.subject}}</h5>
+                            <div
+                                {# depending if the project is closed or not send a different value to change status #}
+                                {% if not project.status %}
+                                    class="alert alert-success p-2 col-2 text-center" role="alert">Terminé
+                                {% else %}
+                                    class="alert alert-danger p-2 col-2 text-center" role="alert">À faire
+                                {% endif %}
+                            </div>
                         </div>
                         <div class='row py-3 text-center'>
                             <p class='col-6'> Créé le : {{project.creationDate|date('d/m/Y')}}</p>
@@ -49,16 +57,8 @@
                             </ul>
                         </div>
                         <div class='card-body bg-dark text-center'>
-                            <a href='{#{{ path('singlePage', {id: project.id}) }}#}' class='btn btn-warning m-2'>Consulter</a>
-                            <a href='{#{{ path('singlePage', {id: project.id}) }}#}' class='btn btn-warning m-2'>Supprimer</a>
-                            <a href=
-                                {# depending if the project is closed or not send a different value to change status #}
-                                {% if project.status %}
-                                    '{#{{ path('singlePage', {id: project.id}) }}#}' class='btn btn-warning m-2'>Terminé
-                                {% else %}
-                                    '{#{{ path('singlePage', {id: project.id}) }}#}' class='btn btn-warning m-2'>Reprendre
-                                {% endif %}
-                            </a>
+                            <a href='{{ path('project_show', {'id': project.id}) }}' class='btn btn-warning m-2'>Consulter</a>
+                            {{ include('project/_delete_form.html.twig') }}
                         </div>
                     </div>
                 </div>

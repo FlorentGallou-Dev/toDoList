@@ -16,7 +16,6 @@ class ProjectType extends AbstractType
         $builder
             ->add('subject')
             ->add('description')
-            ->add('creation_date')
             ->add('deadline_date')
             ->add('status')
         ;

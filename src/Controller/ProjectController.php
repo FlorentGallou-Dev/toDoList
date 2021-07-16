@@ -37,10 +37,13 @@ class ProjectController extends AbstractController
     public function new(Request $request): Response
     {
         $project = new Project();
+
         $form = $this->createForm(ProjectType::class, $project);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $project->setCreationDate(new \DateTime());
+            $project->setUser($this->getUser()); //Adds the connected user to the account
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($project);
             $entityManager->flush();
@@ -54,7 +57,8 @@ class ProjectController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'project_show', methods: ['GET'])]
+    // Single project page
+    #[Route('/project/{id}', name: 'project_show', methods: ['GET'])]
     public function show(Project $project): Response
     {
         return $this->render('project/show.html.twig', [
@@ -62,6 +66,7 @@ class ProjectController extends AbstractController
         ]);
     }
 
+    // Edit project page
     #[Route('/{id}/edit', name: 'project_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Project $project): Response
     {
@@ -80,6 +85,7 @@ class ProjectController extends AbstractController
         ]);
     }
 
+    // Delete project page
     #[Route('/{id}', name: 'project_delete', methods: ['POST'])]
     public function delete(Request $request, Project $project): Response
     {

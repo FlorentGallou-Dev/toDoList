@@ -30,7 +30,11 @@
 > 24. Created home page controller sending projects list,
 > 25. Created home page vue for projects list to display,
 > 26. Changing strategy, created ProjectController with make:crud to manage all aspects of Project uses.
-
+> 27. Single project page done,
+> 28. Update project page and form done,
+> 29. Delete project done,
+> 30. Project status added next to project name changing state depending if finished or not,
+> 31. New project page done,
 -----
 ## DOCS
 -----
