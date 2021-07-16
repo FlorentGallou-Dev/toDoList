@@ -21,7 +21,7 @@
 > 15. Added properties to User entity,
 > 16. Created fixtures for User entity,
 > 17. Project entity created with make:entity
-> 18. Task entity created with make:entity
+> 18. Task entity created with make:entity,
 > 19. Foreign-key between Project and User done with make:entity,
 > 20. Foreign-key between Task and Project done with make:entity,
 > 21. Created fixtures for Project Entity,
@@ -29,12 +29,16 @@
 > 23. Created Templates - Header, Nav, Footer and customized Home title and prim title,
 > 24. Created home page controller sending projects list,
 > 25. Created home page vue for projects list to display,
-> 26. Changing strategy, created ProjectController with make:crud to manage all aspects of Project uses.
+> 26. Changing strategy, created ProjectController with make:crud to manage all aspects of Project uses,
 > 27. Single project page done,
 > 28. Update project page and form done,
 > 29. Delete project done,
 > 30. Project status added next to project name changing state depending if finished or not,
 > 31. New project page done,
+> 32. Created TaskControlle with make:crud,
+> 33. Linked show_task method to new show task in show_project tastks list page,
+> 34. Delete task done,
+> 35. 
 -----
 ## DOCS
 -----

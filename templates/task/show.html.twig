@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}To Do List - tâche{% endblock %}
+
+{% block body %}
+    <div class="row color-dark">
+        <h1 class="color-dark col-12 mb-5">Tâche - {{ task.title }}</h1>
+
+        {#read and display all flash messages if there is#}
+        {% if app.flashes %}
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ label }}" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+
+        {# shows project list if there is one #}
+        {% if task %}
+            <section class="container col-12 row mx-auto">
+                <div class='col-12 my-3 mx-auto'>
+                    <div class='card mx-1 border border-2 border-warning'>
+                        <div class='card-body bg-dark d-flex justify-content-between'>
+                            <h5 class='card-title text-warning col-10'>{{ task.title }}</h5>
+                            <div
+                                {# depending if the project is closed or not send a different value to change status #}
+                                {% if not task.status %}
+                                    class="alert alert-success p-2 col-2 text-center" role="alert">Terminé
+                                {% else %}
+                                    class="alert alert-danger p-2 col-2 text-center" role="alert">À faire
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class='row py-3 text-center'>
+                            <p class='col-6'> Créé le : {{task.creationDate|date('d/m/Y')}}</p>
+                            <p class='col-6'> Fin le : {{task.deadlineDate|date('d/m/Y')}}</p>
+                        </div>
+                        <div class='card-body bg-dark text-center'>
+                            <a class="btn btn-warning" href="{{ path('project_show', {'id': project.id}) }}">Retour au projet</a>
+                            {{ include('task/_delete_form.html.twig') }}
+                            <a class="btn btn-warning" href="{{ path('task_edit', {'id': task.id}) }}">Modifier</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        {# if not show a message #}
+        {% else %}
+            <p class="lead">Aucune tâche enregistré, veuillez créer votre première tâche grâce au lien dans le projet.</p>
+        {% endif %}
+    </div>
+
+{% endblock %}

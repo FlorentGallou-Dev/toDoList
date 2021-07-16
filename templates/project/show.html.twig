@@ -2,16 +2,16 @@
 
 {% block title %}
     {% if app.user %}
-        To Do List - {% if app.user.sex is same as "Homme" %} M. {% elseif app.user.sex is same as "Femme" %} Mme {% else %} {% endif %}{{app.user.lastname}}
+        To Do List - Projets
     {% endif %}
 {% endblock %}
 
 {% block body %}
     <div class="row color-dark">
-        <h1 class="color-dark col-12 mb-5">Voiçi la liste de vos projets</h1>
+        <h1 class="color-dark col-12 mb-5">Projet {{ project.subject }}</h1>
 
-        {# read and display all flash messages if there is#}
-        {# {% if app.flashes %}
+        {#read and display all flash messages if there is#}
+        {% if app.flashes %}
             {% for label, messages in app.flashes %}
                 {% for message in messages %}
                     <div class="alert alert-{{ label }}" role="alert">
@@ -19,7 +19,7 @@
                     </div>
                 {% endfor %}
             {% endfor %}
-        {% endif %} #}
+        {% endif %}
 
         {# shows project list if there is one #}
         {% if project %}
@@ -44,11 +44,19 @@
                         <hr>
                         <div class='row py-3 px-5'>
                             <h4>Liste des tâches :</h4>
-                            {# <p class='col-6'> nombre de tâches : {{project.tasks}}</p> #}
                             <ul class="list-group list-group-flush list-group-numbered px-5">
-                                {% for task in project.tasks %}
-                                    <li class="list-group-item">{{task.title}}</li>
-                                {% endfor %}
+                                {% set break = false %}
+                                {% if project.tasks is not empty %}
+                                    {% for task in project.tasks %}
+                                        <li class="list-group-item d-flex justify-content-between align-middle">
+                                            <p class="p-0 m-0" >{{task.title}}</p>
+                                            <a href="{{ path('task_show', {'id': task.id, 'projectId': project.id}) }}" class='btn btn-warning'>Consulter</a>
+                                        </li>
+                                    {% endfor %}
+                                {% else %}
+                                    <p class='fs-3'>aucune tâche</p>
+                                    {% set break = true %}
+                                {% endif %}
                             </ul>
                         </div>
                         <div class='card-body bg-dark text-center'>
@@ -61,7 +69,7 @@
             </section>
         {# if not show a message #}
         {% else %}
-            <p class="lead">Aucun projet enregistré, veuillez créer votre premier projet grâce au lien dansl a barre de navigation.</p>
+            <p class="lead">Aucun projet enregistré, veuillez créer votre premier projet grâce au lien dans la barre de navigation.</p>
         {% endif %}
     </div>
 {% endblock %}
