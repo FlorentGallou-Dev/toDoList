@@ -7,7 +7,7 @@
 
     {{ include('task/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a class="btn btn-warning" href="{{ path('project_show', {'id': project.id}) }}">Retour au projet</a>
+    <a class="btn btn-warning" href="{{ path('project_show', {'id': task.project.id}) }}">Retour au projet</a>
 
     {{ include('task/_delete_form.html.twig') }}
 {% endblock %}

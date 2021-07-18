@@ -18,9 +18,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class TaskController extends AbstractController
 {
     // Create a new task
-    #[Route('/new', name: 'task_new', methods: ['GET', 'POST'])]
-    public function new(Request $request): Response
+    #[Route('/{id}/new', name: 'task_new', methods: ['GET', 'POST'])]
+    public function new(Project $project, Request $request): Response
     {
+
         $task = new Task();
         $form = $this->createForm(TaskType::class, $task);
         $form->handleRequest($request);
@@ -28,29 +29,30 @@ class TaskController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $task->setCreationDate(new \DateTime());
-            $task->setProject($this->getUser()); //Adds the connected user to the account
+            $task->setProject($project); //Adds the actual project to the task project
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($task);
             $entityManager->flush();
 
-            return $this->redirectToRoute('task_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('project_show', ['id' => $project->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('task/new.html.twig', [
             'task' => $task,
             'form' => $form,
+            'project' => $project,
         ]);
     }
 
     // Read Single task page
-    #[Route('/{id}/{projectId}', name: 'task_show', methods: ['GET'])]
-    public function show(Task $task, int $projectId, ProjectRepository $projectRepository): Response
+    #[Route('/{id}', name: 'task_show', methods: ['GET'])]
+    public function show(Task $task, ProjectRepository $projectRepository): Response
     {
-        $user = $this->getUser()->getId(); //gets the actualy connected user
 
         //Making sure account data being load is current User's data ans gets the selected account
-        $project = $projectRepository->findOneBy(array('id' => $projectId));
+        $project = $projectRepository->findOneBy(array('id' => $task->getProject()->getId()));
+        
 
         return $this->render('task/show.html.twig', [
             'task' => $task,
@@ -68,7 +70,7 @@ class TaskController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('task_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('task_show', ['id' => $task->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('task/edit.html.twig', [
@@ -81,12 +83,14 @@ class TaskController extends AbstractController
     #[Route('/{id}', name: 'task_delete', methods: ['POST'])]
     public function delete(Request $request, Task $task): Response
     {
+        $projectId = $task->getProject()->getId();
+
         if ($this->isCsrfTokenValid('delete'.$task->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($task);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('task_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('project_show', ['id' => $projectId ], Response::HTTP_SEE_OTHER);
     }
 }

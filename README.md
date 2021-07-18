@@ -37,8 +37,13 @@
 > 31. New project page done,
 > 32. Created TaskControlle with make:crud,
 > 33. Linked show_task method to new show task in show_project tastks list page,
-> 34. Delete task done,
-> 35. 
+> 34. Single task page done,
+> 35. Delete task done,
+> 36. Update task done,
+> 37. Create new task done,
+> 38. Task status, deadline added next to task name in single project changing state depending if finished or not,
+> 40. Added new user page,
+> 41. Added new user form with crud (keeping only what's needed),
 -----
 ## DOCS
 -----
