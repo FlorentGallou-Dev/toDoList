@@ -8,7 +8,7 @@
 
 {% block body %}
     <div class="row color-dark">
-        <h1 class="color-dark col-12 mb-5">Voiçi la liste de vos projets</h1>
+        <h1 class="color-dark col-12 mb-5">Vos projets</h1>
 
         {# read and display all flash messages if there is#}
         {% if app.flashes %}
@@ -45,15 +45,20 @@
                         </div>
                         <hr>
                         <div class='row py-3 text-center'>
-                            {# <p class='col-6'> nombre de tâches : {{project.tasks}}</p> #}
                             <ul class="text-center">
                                 {% set break = false %}
-                                {% for tast in project.tasks %}
-                                    {% if not break %}
-                                        <p class='fs-3'>{{loop.length}} tâches</p>
-                                        {% set break = true %}
-                                    {% endif %}
-                                {% endfor %}
+                                <!-- test the tasks list if empty only way to know if there is tasks -->
+                                {% if project.tasks is not empty %}
+                                    {% for task in project.tasks %}
+                                        {% if not break %}
+                                            <p class='fs-3'>{{loop.length}} tâches</p>
+                                            {% set break = true %}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                    <p class='fs-3'>aucune tâche</p>
+                                    {% set break = true %}
+                                {% endif %}
                             </ul>
                         </div>
                         <div class='card-body bg-dark text-center'>

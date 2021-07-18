@@ -2,19 +2,19 @@
 
 namespace App\Form;
 
-use App\Entity\Project;
+use App\Entity\Task;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class ProjectType extends AbstractType
+class TaskType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('subject')
+            ->add('title')
             ->add('description')
             ->add('deadline_date')
             ->add('status')
@@ -28,7 +28,7 @@ class ProjectType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Project::class,
+            'data_class' => Task::class,
         ]);
     }
 }

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}To Do List - Modifier la tâche{% endblock %}
+
+{% block body %}
+    <h1>Modifier la tâche : {{ task.title }}</h1>
+
+    {{ include('task/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a class="btn btn-warning" href="{{ path('project_show', {'id': task.project.id}) }}">Retour au projet</a>
+
+    {{ include('task/_delete_form.html.twig') }}
+{% endblock %}

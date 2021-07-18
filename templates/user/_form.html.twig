@@ -1,0 +1,33 @@
+{{ form_start(form, { 'attr': {'class': 'row g-3'} }) }}
+        
+    <div class="my-custom-class-for-errors">
+        {{ form_errors(form) }}
+    </div>
+
+    <div class="col-12 row my-3">
+        {{ form_label(form.sex, 'sexe de naissance', {'label_attr': {'class': 'form-label fw-bold'}})}}
+        {{ form_widget(form.sex, { 'attr': {'class': 'd-flex'} }) }}
+    </div>
+    <div class="col-12 row my-3">
+        {{ form_label(form.firstname, 'Prénom', {'label_attr': {'class': 'form-label fw-bold'}})}}
+        {{ form_widget(form.firstname, { 'attr': {'class': 'form-control'} }) }}
+    </div>
+    <div class="col-12 row my-3">
+        {{ form_label(form.lastname, 'Nom', {'label_attr': {'class': 'form-label fw-bold'}})}}
+        {{ form_widget(form.lastname, { 'attr': {'class': 'form-control'} }) }}
+    </div>
+    <div class="col-12 row my-3">
+        {{ form_label(form.birthdate, 'Date de naissance', {'label_attr': {'class': 'form-label fw-bold'}})}}
+        {{ form_widget(form.birthdate, { 'attr': {'class': 'd-flex'} }) }}
+    </div>
+    <hr>
+    <div class="col-12 row my-3">
+        {{ form_label(form.email, 'Email - Login', {'label_attr': {'class': 'form-label fw-bold'}})}}
+        {{ form_widget(form.email, { 'attr': {'class': 'form-control'} }) }}
+    </div>
+    <div class="col-12 row my-3">
+        {{ form_label(form.password, 'Mot de passe', {'label_attr': {'class': 'form-label fw-bold'}})}}
+        {{ form_widget(form.password, { 'attr': {'class': 'form-control'} }) }}
+    </div>
+
+{{ form_end(form) }}

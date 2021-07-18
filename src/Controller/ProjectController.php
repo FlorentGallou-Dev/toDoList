@@ -25,15 +25,16 @@ class ProjectController extends AbstractController
     #[Route('/', name: 'project_index', methods: ['GET'])]
     public function index(ProjectRepository $projectRepository): Response
     {
-        $projects = $this->getUser()->getProjects(); // gets the actualy connected user projects list
+        //$projects = $this->getUser()->getProjects(); // gets the actualy connected user projects list
+        $projects = $projectRepository->getProjects();
 
         return $this->render('project/index.html.twig', [
             'projects' => $projects,
         ]);
     }
 
-    // Add project page
-    #[Route('/new', name: 'project_new', methods: ['GET', 'POST'])]
+    // Create project page
+    #[Route('/project/new', name: 'project_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {
         $project = new Project();
@@ -42,8 +43,15 @@ class ProjectController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $project->setCreationDate(new \DateTime());
             $project->setUser($this->getUser()); //Adds the connected user to the account
+
+            $this->addFlash(
+                'success',
+                "Projet ajouté"
+            );  
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($project);
             $entityManager->flush();
@@ -57,7 +65,7 @@ class ProjectController extends AbstractController
         ]);
     }
 
-    // Single project page
+    // Read Single project page
     #[Route('/project/{id}', name: 'project_show', methods: ['GET'])]
     public function show(Project $project): Response
     {
@@ -66,17 +74,33 @@ class ProjectController extends AbstractController
         ]);
     }
 
-    // Edit project page
-    #[Route('/{id}/edit', name: 'project_edit', methods: ['GET', 'POST'])]
+    // Update project page
+    #[Route('/project/{id}/edit', name: 'project_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Project $project): Response
     {
-        $form = $this->createForm(ProjectType::class, $project);
-        $form->handleRequest($request);
+        $user = $this->getUser(); //gets the actualy connected user
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+        if ($project->getUser() === $user) {
+            
+            $form = $this->createForm(ProjectType::class, $project);
+            $form->handleRequest($request);
 
-            return $this->redirectToRoute('project_index', [], Response::HTTP_SEE_OTHER);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $this->addFlash(
+                    'success',
+                    "Votre projet a bien été mis à jour"
+                );                                                     //Adds a success message
+                $this->getDoctrine()->getManager()->flush();
+
+                return $this->redirectToRoute('project_index', [], Response::HTTP_SEE_OTHER);
+            }
+
+        }
+        else {
+            $this->addFlash(
+                'danger',
+                "Ceci n'est pas votre projet"
+            );                                                     //Adds an error message if user tries to delete another user project
         }
 
         return $this->renderForm('project/edit.html.twig', [
@@ -86,13 +110,30 @@ class ProjectController extends AbstractController
     }
 
     // Delete project page
-    #[Route('/{id}', name: 'project_delete', methods: ['POST'])]
+    #[Route('/project/{id}', name: 'project_delete', methods: ['POST'])]
     public function delete(Request $request, Project $project): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$project->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($project);
-            $entityManager->flush();
+        $user = $this->getUser(); //gets the actualy connected user
+        
+        if ($project->getUser() === $user) {
+            
+            if ($this->isCsrfTokenValid('delete'.$project->getId(), $request->request->get('_token'))) {
+
+                $entityManager = $this->getDoctrine()->getManager();
+                $this->addFlash(
+                    'success',
+                    "Votre projet a bien été supprimé"
+                );                                                     //Adds a success message
+                $entityManager->remove($project);
+                $entityManager->flush();
+            }
+
+        }
+        else {
+            $this->addFlash(
+                'danger',
+                "Ceci n'est pas votre projet"
+            );                                                     //Adds an error message if user tries to delete another user project
         }
 
         return $this->redirectToRoute('project_index', [], Response::HTTP_SEE_OTHER);
