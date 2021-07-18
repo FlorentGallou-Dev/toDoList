@@ -25,7 +25,8 @@ class ProjectController extends AbstractController
     #[Route('/', name: 'project_index', methods: ['GET'])]
     public function index(ProjectRepository $projectRepository): Response
     {
-        $projects = $this->getUser()->getProjects(); // gets the actualy connected user projects list
+        //$projects = $this->getUser()->getProjects(); // gets the actualy connected user projects list
+        $projects = $projectRepository->getProjects();
 
         return $this->render('project/index.html.twig', [
             'projects' => $projects,

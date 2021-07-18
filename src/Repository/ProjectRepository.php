@@ -47,4 +47,15 @@ class ProjectRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function getProjects()
+    {
+        return $this->createQueryBuilder('p')   //appel ProjectRepository et créer l'objet de constructeur de requète p = table Project AS p
+            ->innerJoin('p.user', 'u')
+            ->addselect('u')
+            ->orderBy('p.deadline_date', 'DESC')           // Trouver tout les Projets rangés décroissants par la date limite
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

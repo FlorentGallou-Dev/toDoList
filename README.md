@@ -43,7 +43,8 @@
 > 37. Create new task done,
 > 38. Task status, deadline added next to task name in single project changing state depending if finished or not,
 > 40. Added new user page,
-> 41. Added new user form with crud (keeping only what's needed),
+> 41. Added new user form (keeping only what's needed),
+> 42. Project list odered by deadline dates descendant.
 -----
 ## DOCS
 -----

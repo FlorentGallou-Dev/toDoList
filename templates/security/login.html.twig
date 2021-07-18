@@ -58,9 +58,13 @@
                 #}
 
                 <button class="btn btn-lg btn-warning my-3" type="submit">
-                    Sign in
+                    Connexion
                 </button>
             </form>
+            <hr>
+            <div class="alert alert-success m-5 text-center" role="alert">
+                <p class="m-0">Pas encore de compte ? <a href="{{ path('user_new') }}">Créer ma session</a></p>
+            </div>
             {% endblock %}
         </main>
         {#{% include "footer.html.twig" %}#}
